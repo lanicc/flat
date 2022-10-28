@@ -23,20 +23,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.StringJoiner;
-import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 
 /**
@@ -45,7 +38,6 @@ import java.util.function.Predicate;
  * @author lan
  */
 @Slf4j
-@Component
 public class DingtalkOpenApi {
 
     static RestTemplate restTemplate;
@@ -60,9 +52,20 @@ public class DingtalkOpenApi {
         restTemplate = new RestTemplate(Collections.singletonList(jackson2HttpMessageConverter));
     }
 
-    String appKey = "dinge9sdxrh8jywuvmaq";
-    String appSecret = "JjEUZCvB9HdgPLYYBoV9m5aRO50X8fRYYMJBjFn-aeHKUs-EFZhOqOmJWO0sAT7O";
+    private final String appKey;
+    private final String appSecret;
 
+    private final AccessTokenManager accessTokenManager;
+
+    public DingtalkOpenApi(String appKey, String appSecret) {
+        this(appKey, appSecret, AccessTokenManager.def());
+    }
+
+    public DingtalkOpenApi(String appKey, String appSecret, AccessTokenManager accessTokenManager) {
+        this.appKey = appKey;
+        this.appSecret = appSecret;
+        this.accessTokenManager = accessTokenManager;
+    }
 
     /**
      * 创建场景群
@@ -73,10 +76,8 @@ public class DingtalkOpenApi {
         DingTalkClient client = new DefaultDingTalkClient(UrlConstant.SCENE_GROUP_CREATE);
         OapiImChatScenegroupCreateResponse rsp = client.execute(req, reqForAccessToken());
 
-        if (rsp.getSuccess()) {
-            return rsp.getResult().getOpenConversationId();
-        }
-        throw new ApiException("unknown error");
+        assertRsp(rsp, OapiImChatScenegroupCreateResponse::isSuccess);
+        return rsp.getResult().getOpenConversationId();
     }
 
     /**
@@ -115,45 +116,22 @@ public class DingtalkOpenApi {
     }
 
     public String reqForAccessToken() {
-        GetTokenResult cache = readCache();
-        if (cache.getExpiresIn() > TimeUnit.SECONDS.toMillis(10)) {
-            return cache.getAccessToken();
-        }
+        return accessTokenManager.get(appKey, appSecret);
+    }
+
+    public static GetTokenResult reqForAccessToken(String appKey, String appSecret) {
         try {
             URI uri = of("/gettoken", "appkey", appKey, "appsecret", appSecret);
             GetTokenResult result = restTemplate.getForObject(uri, GetTokenResult.class);
             assert result != null;
-            cacheAccessToken(result);
-            return result.getAccessToken();
+            return result;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void cacheAccessToken(GetTokenResult result) throws IOException {
-        FileOutputStream out = new FileOutputStream(System.getProperty("user.home") + "/dingtalk_openapi_accesstoken.txt");
-        DataOutputStream dataOutputStream = new DataOutputStream(out);
-        dataOutputStream.writeLong(TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()) + result.getExpiresIn());
-        dataOutputStream.writeUTF(result.getAccessToken());
-        dataOutputStream.flush();
-        dataOutputStream.close();
-    }
 
-    private GetTokenResult readCache() {
-        try {
-            FileInputStream in = new FileInputStream(System.getProperty("user.home") + "/dingtalk_openapi_accesstoken.txt");
-            DataInputStream dataInputStream = new DataInputStream(in);
-            long expireAt = dataInputStream.readLong() - TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis());
-            String accessToken = dataInputStream.readUTF();
-            return new GetTokenResult(accessToken, expireAt);
-        } catch (IOException e) {
-            log.warn("read cache error", e);
-            return new GetTokenResult();
-        }
-    }
-
-
-    private URI of(String uri, String... uriParams) throws URISyntaxException {
+    private static URI of(String uri, String... uriParams) throws URISyntaxException {
         if (uriParams == null || uriParams.length == 0) {
             return new URI("https://api.dingtalk.com" + uri);
         } else {
@@ -169,7 +147,7 @@ public class DingtalkOpenApi {
     @EqualsAndHashCode(callSuper = true)
     @AllArgsConstructor
     @NoArgsConstructor
-    private static class GetTokenResult extends DingtalkResult {
+    private static class _GetTokenResult extends DingtalkResult {
         private String accessToken;
         private long expiresIn;
     }

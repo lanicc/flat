@@ -111,7 +111,20 @@ public class ElasticsearchService {
                 client.prepareSearch(FLAT_YUQUE_DOCS)
                         .setTypes("doc")
                         .setQuery(
-                                QueryBuilders.multiMatchQuery(keyword, "title", "body", "body_draft", "description")
+                                QueryBuilders.boolQuery()
+                                        .should(
+                                                QueryBuilders.matchQuery("title", keyword)
+                                                        .boost(1f)
+                                        )
+                                        .should(
+                                                QueryBuilders.matchQuery("body", keyword)
+                                                        .boost(0.5f)
+                                        )
+                                        .should(
+                                                QueryBuilders.matchQuery("description", keyword)
+                                                        .boost(0.1f)
+                                        )
+                                        .minimumShouldMatch(1)
                         )
                         .setSize(5)
                         .setFetchSource(new String[]{"id", "title", "book.namespace", "slug"}, new String[0])
@@ -121,11 +134,11 @@ public class ElasticsearchService {
             return Arrays.stream(hits)
                     .map(hit -> {
                         Map<String, Object> source = hit.getSource();
-                        //noinspection rawtypes
+                        // noinspection rawtypes
                         return new YuqueDocSearchResult(
                                 String.valueOf(source.get("id")),
                                 String.valueOf(source.get("title")),
-                                String.valueOf(((Map)source.get("book")).get("namespace")),
+                                String.valueOf(((Map) source.get("book")).get("namespace")),
                                 String.valueOf(source.get("slug"))
                         );
                     })

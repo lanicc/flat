@@ -1,10 +1,10 @@
 package io.github.lanicc.flat.yuque;
 
+import com.alibaba.fastjson.JSONObject;
 import org.junit.jupiter.api.Test;
 
 import java.net.URISyntaxException;
-
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
 
 /**
  * Created on 2022/10/24.
@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class YuqueOpenApiTest {
 
-    YuqueOpenApi openApi = new YuqueOpenApi();
+    YuqueOpenApi openApi = new YuqueOpenApi("https://souche.yuque.com", "kF0gzLFpJC8ELl4k7nZ6vXTDsxnaepKHly9wgfMN");
 
     @Test
     void user() throws URISyntaxException {
@@ -38,5 +38,28 @@ class YuqueOpenApiTest {
     @Test
     void repoDoc() {
         System.out.println(openApi.repoDoc("base-developer/wxz0gg", "fehed0"));
+    }
+
+    @Test
+    void search() {
+        YuqueOpenApi.SearchResult result = openApi.search("用户组件", "doc");
+
+        System.out.println();
+    }
+
+    @Test
+    void syncToEs() {
+    }
+
+    @Test
+    void searchDoc() {
+        List<YuqueOpenApi.SearchResultItem> resultItems = openApi.searchDoc("用户组件");
+        System.out.println(resultItems);
+    }
+
+    @Test
+    void search0() {
+        JSONObject jsonObject = openApi.search0("reportId", "doc");
+        System.out.println(jsonObject);
     }
 }

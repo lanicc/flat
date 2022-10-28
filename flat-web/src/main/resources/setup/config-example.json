@@ -1,0 +1,46 @@
+{
+  "appKey": "dinge9sdxrh8jywuvmaq",
+  "services": [
+    {
+      "name": "搜索",
+      "maintainer": "lan",
+      "maintainerDingId": "070515353326085011"
+    },
+    {
+      "name": "用户",
+      "maintainer": "lan",
+      "maintainerDingId": "070515353326085011"
+    },
+    {
+      "name": "权限",
+      "maintainer": "lan",
+      "maintainerDingId": "070515353326085011"
+    },
+    {
+      "name": "店铺",
+      "maintainer": "lan",
+      "maintainerDingId": "070515353326085011"
+    },
+    {
+      "name": "登录",
+      "maintainer": "lan",
+      "maintainerDingId": "070515353326085011"
+    },
+    {
+      "name": "统一工作台",
+      "maintainer": "lan",
+      "maintainerDingId": "070515353326085011"
+    }
+  ],
+  "appSecret": "JjEUZCvB9HdgPLYYBoV9m5aRO50X8fRYYMJBjFn-aeHKUs-EFZhOqOmJWO0sAT7O",
+  "yuque": {
+    "url": "https://souche.yuque.com",
+    "accessToken": "kF0gzLFpJC8ELl4k7nZ6vXTDsxnaepKHly9wgfMN",
+    "accessTokenOwner": "lan"
+  },
+  "ownerDingId": "070515353326085011",
+  "groupTemplateId": "2a9be7a9-15dd-4040-ae5b-818e64b36ae5",
+  "subGroupTemplateId": "bdf185b7-9500-4ec3-96a1-1720cf67c164",
+  "groupTemplateRobotCode": "0epWSTTB0m8Wox216668373842831262",
+  "subGroupTemplateRobotCode": "2A7Mzx0RGoZYSm216668500132861308"
+}

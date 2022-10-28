@@ -1,6 +1,32 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0">
     <option name="myName" value="Project Default" />
+    <inspection_tool class="CssUnresolvedCustomProperty" enabled="false" level="ERROR" enabled_by_default="false">
+      <scope name="Project Files" level="ERROR" enabled="false" />
+    </inspection_tool>
+    <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="7">
+            <item index="0" class="java.lang.String" itemvalue="nobr" />
+            <item index="1" class="java.lang.String" itemvalue="noembed" />
+            <item index="2" class="java.lang.String" itemvalue="comment" />
+            <item index="3" class="java.lang.String" itemvalue="noscript" />
+            <item index="4" class="java.lang.String" itemvalue="embed" />
+            <item index="5" class="java.lang.String" itemvalue="script" />
+            <item index="6" class="java.lang.String" itemvalue="histogram" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="IncorrectHttpHeaderInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="customHeaders">
+        <set>
+          <option value="X-Auth-Token" />
+        </set>
+      </option>
+    </inspection_tool>
     <inspection_tool class="fcd36335-ac86-4bef-8d30-062d8aae0364_CryptoCipherInsecureAsymmetricCryptographicAlgorithm" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
     <inspection_tool class="fcd36335-ac86-4bef-8d30-062d8aae0364_CryptoKeyAgreementGuideonApprovedCryptographicAlgorithm" enabled="true" level="SENSEI MARKED INFO" enabled_by_default="true" />
     <inspection_tool class="fcd36335-ac86-4bef-8d30-062d8aae0364_CryptoKeyAgreementInsecureCryptographicAlgorithm" enabled="true" level="SENSEI ERROR" enabled_by_default="true" />
