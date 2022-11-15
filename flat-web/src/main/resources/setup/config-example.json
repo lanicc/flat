@@ -32,10 +32,10 @@
       "maintainerDingId": "070515353326085011"
     }
   ],
-  "appSecret": "JjEUZCvB9HdgPLYYBoV9m5aRO50X8fRYYMJBjFn-aeHKUs-EFZhOqOmJWO0sAT7O",
+  "appSecret": "-aeHKUs-EFZhOqOmJWO0sAT7O",
   "yuque": {
-    "url": "https://souche.yuque.com",
-    "accessToken": "kF0gzLFpJC8ELl4k7nZ6vXTDsxnaepKHly9wgfMN",
+    "url": "https://yuque.com",
+    "accessToken": "",
     "accessTokenOwner": "lan"
   },
   "ownerDingId": "070515353326085011",
