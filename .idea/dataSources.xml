@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="search_sample@test.database3501.scsite.net" uuid="425368de-30dd-416d-b157-252fe6840671">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <remarks>Fzwu5TJECUXISriz</remarks>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://test.database3501.scsite.net:3501/search_sample</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+  </component>
+</project>

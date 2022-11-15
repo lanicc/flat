@@ -1,0 +1,27 @@
+{
+  "conversationId": "cidFbIzvlkb07o0Rz/g8b/QBw==",
+  "atUsers": [
+    {
+      "dingtalkId": "$:LWCP_v1:$kn5DdRoLXjKUSPxysmYXTigSAtY6dgpS"
+    }
+  ],
+  "chatbotCorpId": "dingc63549abfdce9b5cf5bf40eda33b7ba0",
+  "chatbotUserId": "$:LWCP_v1:$kn5DdRoLXjKUSPxysmYXTigSAtY6dgpS",
+  "msgId": "msgtvDoZfqGFc168tbi+2647g==",
+  "senderNick": "Lab",
+  "isAdmin": false,
+  "senderStaffId": "016361334258106905",
+  "sessionWebhookExpiredTime": 1666519431823,
+  "createAt": 1666514031661,
+  "senderCorpId": "dingc63549abfdce9b5cf5bf40eda33b7ba0",
+  "conversationType": "2",
+  "senderId": "$:LWCP_v1:$FBJoEIp9+wN9YGCFBNSLekrSgbn6TXLC",
+  "conversationTitle": "哈哈智能服务群",
+  "isInAtList": true,
+  "sessionWebhook": "https://oapi.dingtalk.com/robot/sendBySession?session=abf1794cb1ef37fa8700ca647da6568d",
+  "text": {
+    "content": " 登录:sso,登录,账号,密码"
+  },
+  "robotCode": "EZkXcLtMPzpkoX216664474884781286",
+  "msgtype": "text"
+}
